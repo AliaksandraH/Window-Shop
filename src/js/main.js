@@ -6,7 +6,14 @@ import changeModalState from "./modules/changeModalState";
 
 window.addEventListener("DOMContentLoaded", () => {
     ("use strict");
-    let modalState = {};
+    let modalState = {
+        forms: 0,
+        width: 0,
+        height: 0,
+        type: "tree",
+        profile: "cold",
+    };
+
     changeModalState(modalState);
     modals();
     tabs(".glazing_slider", ".glazing_block", ".glazing_content", "active");

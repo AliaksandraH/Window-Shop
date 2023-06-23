@@ -17638,7 +17638,13 @@ __webpack_require__.r(__webpack_exports__);
 window.addEventListener("DOMContentLoaded", function () {
   "use strict";
 
-  var modalState = {};
+  var modalState = {
+    forms: 0,
+    width: 0,
+    height: 0,
+    type: "tree",
+    profile: "cold"
+  };
   Object(_modules_changeModalState__WEBPACK_IMPORTED_MODULE_4__["default"])(modalState);
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_1__["default"])();
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])(".glazing_slider", ".glazing_block", ".glazing_content", "active");
@@ -17833,6 +17839,13 @@ var forms = function forms(state) {
         }
       }
 
+      state = {
+        forms: 0,
+        width: 0,
+        height: 0,
+        type: "tree",
+        profile: "cold"
+      };
       postData("assets/server.php", formData).then(function (res) {
         console.log(res);
         statusMessage.textContent = message.success;
