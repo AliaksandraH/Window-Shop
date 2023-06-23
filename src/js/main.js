@@ -2,12 +2,13 @@ import "./slider";
 import modals from "./modules/modals";
 import tabs from "./modules/tabs";
 import forms from "./modules/forms";
+import changeModalState from "./modules/changeModalState";
 
 window.addEventListener("DOMContentLoaded", () => {
-    "use strict";
-
+    ("use strict");
+    let modalState = {};
+    changeModalState(modalState);
     modals();
-    forms();
     tabs(".glazing_slider", ".glazing_block", ".glazing_content", "active");
     tabs(
         ".decoration_slider",
@@ -22,4 +23,5 @@ window.addEventListener("DOMContentLoaded", () => {
         "do_image_more",
         "inline-block"
     );
+    forms(modalState);
 });
