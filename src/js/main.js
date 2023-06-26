@@ -3,6 +3,7 @@ import modals from "./modules/modals";
 import tabs from "./modules/tabs";
 import forms from "./modules/forms";
 import changeModalState from "./modules/changeModalState";
+import timer from "./modules/timer";
 
 window.addEventListener("DOMContentLoaded", () => {
     ("use strict");
@@ -16,6 +17,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     changeModalState(modalState);
     modals();
+    timer(".container1", "2023-07-01");
     tabs(".glazing_slider", ".glazing_block", ".glazing_content", "active");
     tabs(
         ".decoration_slider",
