@@ -1,3 +1,5 @@
+import scrollCalc from "./scrollCalc";
+
 const modals = () => {
     function dindModal(
         triggerSelector,
@@ -9,7 +11,7 @@ const modals = () => {
             modal = document.querySelector(modalSelector),
             close = document.querySelector(closeSelector),
             windows = document.querySelectorAll("[data-modal]"),
-            scroll = calcScroll();
+            scroll = scrollCalc();
 
         trigger.forEach((item) => {
             item.addEventListener("click", (e) => {
@@ -54,20 +56,8 @@ const modals = () => {
         setTimeout(() => {
             document.querySelector(selector).style.display = "block";
             document.body.style.overflow = "hidden";
+            document.body.style.marginRight = `${scrollCalc()}px`;
         }, time);
-    }
-
-    function calcScroll() {
-        let div = document.createElement("div");
-        div.style.width = "50px";
-        div.style.height = "50px";
-        div.style.overflowY = "scroll";
-        div.style.visibility = "hiddent";
-
-        document.body.appendChild(div);
-        let scrollWidth = div.offsetWidth - div.clientWidth;
-        div.remove();
-        return scrollWidth;
     }
 
     dindModal(

@@ -17880,11 +17880,15 @@ var forms = function forms(state) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _scrollCalc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scrollCalc */ "./src/js/modules/scrollCalc.js");
+
+
 var images = function images() {
   var imgPopup = document.createElement("div"),
       workSection = document.querySelector(".works"),
-      bigImg = document.createElement("img");
-  imgPopup.classList.add("popup");
+      bigImg = document.createElement("img"),
+      scroll = Object(_scrollCalc__WEBPACK_IMPORTED_MODULE_0__["default"])();
+  imgPopup.classList.add("popup_img");
   workSection.appendChild(imgPopup);
   imgPopup.style.justifyContent = "center";
   imgPopup.style.alignItems = "center";
@@ -17897,11 +17901,16 @@ var images = function images() {
     if (target && target.classList.contains("preview")) {
       imgPopup.style.display = "flex";
       var path = target.parentNode.getAttribute("href");
+      document.body.style.overflow = "hidden";
+      document.body.style.marginRight = "".concat(scroll, "px");
       bigImg.setAttribute("src", path);
+      bigImg.classList.add("image_big");
     }
 
-    if (target && target.matches("div.popup")) {
+    if (target && target.matches("div.popup_img")) {
       imgPopup.style.display = "none";
+      document.body.style.overflow = "";
+      document.body.style.marginRight = "0px";
     }
   });
 };
@@ -17921,6 +17930,8 @@ var images = function images() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _scrollCalc__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./scrollCalc */ "./src/js/modules/scrollCalc.js");
+
 
 
 var modals = function modals() {
@@ -17930,7 +17941,7 @@ var modals = function modals() {
         modal = document.querySelector(modalSelector),
         close = document.querySelector(closeSelector),
         windows = document.querySelectorAll("[data-modal]"),
-        scroll = calcScroll();
+        scroll = Object(_scrollCalc__WEBPACK_IMPORTED_MODULE_1__["default"])();
     trigger.forEach(function (item) {
       item.addEventListener("click", function (e) {
         if (e.target) {
@@ -17969,19 +17980,8 @@ var modals = function modals() {
     setTimeout(function () {
       document.querySelector(selector).style.display = "block";
       document.body.style.overflow = "hidden";
+      document.body.style.marginRight = "".concat(Object(_scrollCalc__WEBPACK_IMPORTED_MODULE_1__["default"])(), "px");
     }, time);
-  }
-
-  function calcScroll() {
-    var div = document.createElement("div");
-    div.style.width = "50px";
-    div.style.height = "50px";
-    div.style.overflowY = "scroll";
-    div.style.visibility = "hiddent";
-    document.body.appendChild(div);
-    var scrollWidth = div.offsetWidth - div.clientWidth;
-    div.remove();
-    return scrollWidth;
   }
 
   dindModal(".popup_engineer_btn", ".popup_engineer", ".popup_engineer .popup_close");
@@ -17993,6 +17993,31 @@ var modals = function modals() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modals);
+
+/***/ }),
+
+/***/ "./src/js/modules/scrollCalc.js":
+/*!**************************************!*\
+  !*** ./src/js/modules/scrollCalc.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var scrollCalc = function scrollCalc() {
+  var div = document.createElement("div");
+  div.style.width = "50px";
+  div.style.height = "50px";
+  div.style.overflowY = "scroll";
+  div.style.visibility = "hiddent";
+  document.body.appendChild(div);
+  var scrollWidth = div.offsetWidth - div.clientWidth;
+  div.remove();
+  return scrollWidth;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (scrollCalc);
 
 /***/ }),
 
