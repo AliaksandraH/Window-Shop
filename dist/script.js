@@ -17650,13 +17650,13 @@ window.addEventListener("DOMContentLoaded", function () {
     profile: "cold"
   };
   Object(_modules_changeModalState__WEBPACK_IMPORTED_MODULE_4__["default"])(modalState);
-  Object(_modules_modals__WEBPACK_IMPORTED_MODULE_1__["default"])();
-  Object(_modules_timer__WEBPACK_IMPORTED_MODULE_5__["default"])(".container1", "2023-07-01");
+  Object(_modules_modals__WEBPACK_IMPORTED_MODULE_1__["default"])(modalState);
+  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])(modalState);
+  Object(_modules_images__WEBPACK_IMPORTED_MODULE_6__["default"])();
+  Object(_modules_timer__WEBPACK_IMPORTED_MODULE_5__["default"])(".container1", "2025-07-01");
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])(".glazing_slider", ".glazing_block", ".glazing_content", "active");
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])(".decoration_slider", ".no_click", ".decoration_content > div > div", "after_click");
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])(".balcon_icons", ".balcon_icons_img", ".big_img > img", "do_image_more", "inline-block");
-  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])(modalState);
-  Object(_modules_images__WEBPACK_IMPORTED_MODULE_6__["default"])();
 });
 
 /***/ }),
@@ -17713,8 +17713,6 @@ var changeModalState = function changeModalState(state) {
             state[prop] = item.value;
             break;
         }
-
-        console.log(state);
       });
     });
   }
@@ -17934,9 +17932,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var modals = function modals() {
-  function dindModal(triggerSelector, modalSelector, closeSelector) {
-    var closeClickOverlay = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+var modals = function modals(state) {
+  function bindModal(triggerSelector, modalSelector, closeSelector) {
+    var checkValuesInput = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
     var trigger = document.querySelectorAll(triggerSelector),
         modal = document.querySelector(modalSelector),
         close = document.querySelector(closeSelector),
@@ -17944,6 +17942,12 @@ var modals = function modals() {
         scroll = Object(_scrollCalc__WEBPACK_IMPORTED_MODULE_1__["default"])();
     trigger.forEach(function (item) {
       item.addEventListener("click", function (e) {
+        if (checkValuesInput) {
+          if (state.width === 0 || state.height === 0 || state.width === "" || state.height === "") {
+            return;
+          }
+        }
+
         if (e.target) {
           e.preventDefault();
         }
@@ -17965,7 +17969,7 @@ var modals = function modals() {
       document.body.style.marginRight = "0px";
     });
     modal.addEventListener("click", function (e) {
-      if (e.target === modal && closeClickOverlay) {
+      if (e.target === modal) {
         windows.forEach(function (item) {
           item.style.display = "none";
         });
@@ -17984,11 +17988,11 @@ var modals = function modals() {
     }, time);
   }
 
-  dindModal(".popup_engineer_btn", ".popup_engineer", ".popup_engineer .popup_close");
-  dindModal(".phone_link", ".popup", ".popup .popup_close");
-  dindModal(".popup_calc_btn", ".popup_calc", ".popup_calc_close");
-  dindModal(".popup_calc_button", ".popup_calc_profile", ".popup_calc_profile_close", false);
-  dindModal(".popup_calc_profile_button", ".popup_calc_end", ".popup_calc_end_close", false);
+  bindModal(".popup_engineer_btn", ".popup_engineer", ".popup_engineer .popup_close");
+  bindModal(".phone_link", ".popup", ".popup .popup_close");
+  bindModal(".popup_calc_btn", ".popup_calc", ".popup_calc_close");
+  bindModal(".popup_calc_button", ".popup_calc_profile", ".popup_calc_profile_close", true);
+  bindModal(".popup_calc_profile_button", ".popup_calc_end", ".popup_calc_end_close");
   showModalByTime(".popup", 60000);
 };
 

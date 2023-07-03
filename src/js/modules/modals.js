@@ -1,11 +1,11 @@
 import scrollCalc from "./scrollCalc";
 
-const modals = () => {
-    function dindModal(
+const modals = (state) => {
+    function bindModal(
         triggerSelector,
         modalSelector,
         closeSelector,
-        closeClickOverlay = true
+        checkValuesInput = false
     ) {
         const trigger = document.querySelectorAll(triggerSelector),
             modal = document.querySelector(modalSelector),
@@ -15,6 +15,17 @@ const modals = () => {
 
         trigger.forEach((item) => {
             item.addEventListener("click", (e) => {
+                if (checkValuesInput) {
+                    if (
+                        state.width === 0 ||
+                        state.height === 0 ||
+                        state.width === "" ||
+                        state.height === ""
+                    ) {
+                        return;
+                    }
+                }
+
                 if (e.target) {
                     e.preventDefault();
                 }
@@ -40,7 +51,7 @@ const modals = () => {
         });
 
         modal.addEventListener("click", (e) => {
-            if (e.target === modal && closeClickOverlay) {
+            if (e.target === modal) {
                 windows.forEach((item) => {
                     item.style.display = "none";
                 });
@@ -60,24 +71,24 @@ const modals = () => {
         }, time);
     }
 
-    dindModal(
+    bindModal(
         ".popup_engineer_btn",
         ".popup_engineer",
         ".popup_engineer .popup_close"
     );
-    dindModal(".phone_link", ".popup", ".popup .popup_close");
-    dindModal(".popup_calc_btn", ".popup_calc", ".popup_calc_close");
-    dindModal(
+    bindModal(".phone_link", ".popup", ".popup .popup_close");
+
+    bindModal(".popup_calc_btn", ".popup_calc", ".popup_calc_close");
+    bindModal(
         ".popup_calc_button",
         ".popup_calc_profile",
         ".popup_calc_profile_close",
-        false
+        true
     );
-    dindModal(
+    bindModal(
         ".popup_calc_profile_button",
         ".popup_calc_end",
-        ".popup_calc_end_close",
-        false
+        ".popup_calc_end_close"
     );
     showModalByTime(".popup", 60000);
 };

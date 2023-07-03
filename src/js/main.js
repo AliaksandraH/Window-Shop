@@ -17,8 +17,10 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     changeModalState(modalState);
-    modals();
-    timer(".container1", "2023-07-01");
+    modals(modalState);
+    forms(modalState);
+    images();
+    timer(".container1", "2025-07-01");
     tabs(".glazing_slider", ".glazing_block", ".glazing_content", "active");
     tabs(
         ".decoration_slider",
@@ -33,6 +35,4 @@ window.addEventListener("DOMContentLoaded", () => {
         "do_image_more",
         "inline-block"
     );
-    forms(modalState);
-    images();
 });
