@@ -9,7 +9,7 @@ import images from "./modules/images";
 window.addEventListener("DOMContentLoaded", () => {
     ("use strict");
     let modalState = {
-        forms: 0,
+        form: 0,
         width: 0,
         height: 0,
         type: "tree",

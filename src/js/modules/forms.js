@@ -24,7 +24,12 @@ const forms = (state) => {
 
     const clearInputs = () => {
         inputs.forEach((item) => {
-            item.value = "";
+            if (
+                item.getAttribute("id") !== "width" &&
+                item.getAttribute("id") !== "height"
+            ) {
+                item.value = "";
+            }
         });
     };
 
@@ -42,13 +47,6 @@ const forms = (state) => {
                     formData.append(key, state[key]);
                 }
             }
-            state = {
-                forms: 0,
-                width: 0,
-                height: 0,
-                type: "tree",
-                profile: "cold",
-            };
 
             postData("assets/server.php", formData)
                 .then((res) => {

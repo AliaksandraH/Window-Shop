@@ -17643,7 +17643,7 @@ window.addEventListener("DOMContentLoaded", function () {
   "use strict";
 
   var modalState = {
-    forms: 0,
+    form: 0,
     width: 0,
     height: 0,
     type: "tree",
@@ -17825,7 +17825,9 @@ var forms = function forms(state) {
 
   var clearInputs = function clearInputs() {
     inputs.forEach(function (item) {
-      item.value = "";
+      if (item.getAttribute("id") !== "width" && item.getAttribute("id") !== "height") {
+        item.value = "";
+      }
     });
   };
 
@@ -17843,13 +17845,6 @@ var forms = function forms(state) {
         }
       }
 
-      state = {
-        forms: 0,
-        width: 0,
-        height: 0,
-        type: "tree",
-        profile: "cold"
-      };
       postData("assets/server.php", formData).then(function (res) {
         console.log(res);
         statusMessage.textContent = message.success;
